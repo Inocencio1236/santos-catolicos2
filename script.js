@@ -4,29 +4,30 @@ const searchInput = document.getElementById("search");
 fetch("santos.json")
   .then(res => res.json())
   .then(data => {
-    mostrarSantos(data);
+    mostrarPessoas(data);
 
     searchInput.addEventListener("input", () => {
       const termo = searchInput.value.toLowerCase();
-      const filtrados = data.filter(santo =>
-        santo.nome.toLowerCase().includes(termo)
+      const filtrados = data.filter(pessoa =>
+        pessoa.nome.toLowerCase().includes(termo)
       );
-      mostrarSantos(filtrados);
+      mostrarPessoas(filtrados);
     });
   });
 
-function mostrarSantos(lista) {
+function mostrarPessoas(lista) {
   container.innerHTML = "";
-  lista.forEach(santo => {
+  lista.forEach(pessoa => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <img src="${santo.imagem}" alt="${santo.nome}">
-      <h3>${santo.nome}</h3>
-      <p><strong>Festa:</strong> ${santo.data_festa}</p>
-      <p><strong>Título:</strong> ${santo.titulo}</p>
-      <p><strong>Origem:</strong> ${santo.pais_origem}</p>
+      <img src="${pessoa.imagem}" alt="${pessoa.nome}">
+      <h3>${pessoa.nome}</h3>
+      <p><strong>Festa:</strong> ${pessoa.data_festa}</p>
+      <p><strong>Título:</strong> ${pessoa.titulo}</p>
+      <p><strong>Origem:</strong> ${pessoa.pais_origem}</p>
     `;
     container.appendChild(card);
   });
 }
+
